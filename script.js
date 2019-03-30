@@ -20,12 +20,12 @@ class List{
 		});
   	}
 
-	toggleEmptyListMessage = () => {
+	toggleEmptyListMessage () {
 		this.todoList.children.length === 0 ? 
 		this.emptyListMessage.classList.remove('hidden') : 			this.emptyListMessage.classList.add('hidden');
   	}
 
-	addCheckHandler = (item) => {
+	addCheckHandler (item) {
 		const input = item.querySelector('input');
 		input.addEventListener('change', () => {
 			this.transferItem(item, input.checked, item.parentNode, input.checked ? this.doneList : this.todoList);
@@ -33,7 +33,7 @@ class List{
 	}
 
 	//при создании задачи назначается ИД и задача добавляется в хранилище, если ее там нет
-	createItem = (value, list, tasks, id) => {
+	createItem (value, list, tasks, id){
 		let newItem = document.querySelector('#task-template').content.querySelector('.todo-list-item').cloneNode(true);
 		newItem.querySelector('span').textContent = value;
 		this.addCheckHandler(newItem);
@@ -52,7 +52,7 @@ class List{
 	}
 
 	//при перемещении задачи из одного списка в другой, хранилище обновляется 
-	transferItem = (item, isDone, fromList, toList) => {
+	transferItem (item, isDone, fromList, toList) {
 		const passenger = fromList.removeChild(item);
 		if(isDone){
 			passenger.classList.add('done');
@@ -68,7 +68,7 @@ class List{
 	}
 
 	//при загрузке имеющиеся в харнилище объекты парсятся в соответствующие списки
-	checkTasksInStorage = (tasks, list) => {
+	checkTasksInStorage (tasks, list){
 		if(window.localStorage.getItem(tasks)){
 			this[tasks] = JSON.parse(window.localStorage.getItem(tasks));
 			for(let key in this[tasks]){
@@ -77,12 +77,12 @@ class List{
 		}
 	}
 
-	setTask = (tasks, item) => {
+	setTask(tasks, item){
 		this[tasks][item.dataset.id] = item.textContent;
 		window.localStorage.setItem(tasks, JSON.stringify(this[tasks]));
 	}
 
-	removeTask = (tasks, item) => {
+	removeTask(tasks, item) {
 		delete this[tasks][item.dataset.id];
 		window.localStorage.setItem(tasks, JSON.stringify(this[tasks]));
 	}
