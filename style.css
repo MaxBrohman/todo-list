@@ -52,7 +52,8 @@ body {
 
 .todo-list-item span {
     display: flex;
-    align-items: center;
+	align-items: center;
+	overflow: hidden;
 }
 
 .todo-list-item label{

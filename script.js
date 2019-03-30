@@ -15,7 +15,7 @@ class List{
 
 		document.querySelector('.add-form').addEventListener('submit', (evt) => {
 			evt.preventDefault();
-			this.createItem(this.taskInput.value, this.todoList, this.activeTasks);
+			this.createItem(this.taskInput.value, this.todoList, 'activeTasks');
 			this.taskInput.value = '';
 		});
   	}
@@ -32,7 +32,6 @@ class List{
 		});
 	}
 
-
 	//при создании задачи назначается ИД и задача добавляется в хранилище, если ее там нет
 	createItem = (value, list, tasks, id) => {
 		let newItem = document.querySelector('#task-template').content.querySelector('.todo-list-item').cloneNode(true);
@@ -40,12 +39,11 @@ class List{
 		this.addCheckHandler(newItem);
 		if(!id) {
 			newItem.dataset.id = new Date().getMilliseconds();
-			tasks[newItem.dataset.id] = value;
-			window.localStorage.setItem('activeTasks', JSON.stringify(tasks));
+			this.setTask(tasks, newItem);
 		} else{
 			newItem.dataset.id = id;
 		}
-		if(tasks === this.nonActiveTasks){
+		if(tasks === 'nonActiveTasks'){
 			newItem.classList.add('done');
 			newItem.querySelector('input').checked = true;
 		}
@@ -58,16 +56,12 @@ class List{
 		const passenger = fromList.removeChild(item);
 		if(isDone){
 			passenger.classList.add('done');
-			this.nonActiveTasks[item.dataset.id] = item.textContent;
-			window.localStorage.setItem('nonActiveTasks', JSON.stringify(this.nonActiveTasks));
-			delete this.activeTasks[item.dataset.id];
-			window.localStorage.setItem('activeTasks', JSON.stringify(this.activeTasks));
+			this.setTask('nonActiveTasks', item);
+			this.removeTask('activeTasks', item);
 		} else{
 			passenger.classList.remove('done');
-			this.activeTasks[item.dataset.id] = item.textContent;
-			window.localStorage.setItem('activeTasks', JSON.stringify(this.activeTasks));
-			delete this.nonActiveTasks[item.dataset.id];
-			window.localStorage.setItem('nonActiveTasks', JSON.stringify(this.nonActiveTasks));
+			this.setTask('activeTasks', item);
+			this.removeTask('nonActiveTasks', item);
 		}
 		toList.appendChild(item);
 		this.toggleEmptyListMessage();
@@ -78,9 +72,19 @@ class List{
 		if(window.localStorage.getItem(tasks)){
 			this[tasks] = JSON.parse(window.localStorage.getItem(tasks));
 			for(let key in this[tasks]){
-				this.createItem(this[tasks][key], list, this[tasks], key);
+				this.createItem(this[tasks][key], list, tasks, key);
 			}
 		}
+	}
+
+	setTask = (tasks, item) => {
+		this[tasks][item.dataset.id] = item.textContent;
+		window.localStorage.setItem(tasks, JSON.stringify(this[tasks]));
+	}
+
+	removeTask = (tasks, item) => {
+		delete this[tasks][item.dataset.id];
+		window.localStorage.setItem(tasks, JSON.stringify(this[tasks]));
 	}
 };
 
