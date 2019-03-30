@@ -35,7 +35,7 @@ class List{
 	//при создании задачи назначается ИД и задача добавляется в хранилище, если ее там нет
 	createItem (value, list, tasks, id){
 		let newItem = document.querySelector('#task-template').content.querySelector('.todo-list-item').cloneNode(true);
-		newItem.querySelector('span').textContent = value;
+		newItem.querySelector('.item-content').textContent = value;
 		this.addCheckHandler(newItem);
 		if(!id) {
 			newItem.dataset.id = new Date().getMilliseconds();
