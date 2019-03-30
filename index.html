@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Список дел</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;subset=cyrillic" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+  </head>
+  <body>
+    <section class="active-list">
+        <h1 class="visually-hidden">Список дел</h1>
+        <h2>Активные задачи</h2>
+        <ul class="todo-list">
+        </ul>
+        <p class="empty-tasks hidden">Все задачи выполнены. Новых задач нет.</p>
+        <form class="add-form">
+          <input class="add-form-input" type="text" placeholder="Например, купить слона" autofocus required>
+          <button class="add-form-button" type="submit">Добавить задачу</button>
+        </form>
+    </section>
+    <section class="non-active-list">
+        <h2>Выполненные задачи</h2>
+        <ul class="todo-list done">
+        </ul>
+    </section>
+
+    
+    <template id="task-template">
+      <li class="todo-list-item">
+        <label>
+          <input type="checkbox" class="todo-list-input">
+          <span></span>
+        </label>
+      </li>
+    </template>
+
+
+    <script src="./script.js"></script>
+  </body>
+</html>
