@@ -47,6 +47,11 @@ class List{
 			newItem.classList.add('done');
 			newItem.querySelector('input').checked = true;
 		}
+		newItem.querySelector('.item-delete').addEventListener('click', (evt) => {
+			evt.preventDefault();
+			this.removeTask(tasks, newItem);
+			newItem.remove();
+		});
 		list.appendChild(newItem);
 		this.toggleEmptyListMessage();
 	}
@@ -78,7 +83,7 @@ class List{
 	}
 
 	setTask(tasks, item){
-		this[tasks][item.dataset.id] = item.textContent;
+		this[tasks][item.dataset.id] = item.querySelector('.item-content').textContent;
 		window.localStorage.setItem(tasks, JSON.stringify(this[tasks]));
 	}
 

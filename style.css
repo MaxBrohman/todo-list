@@ -59,10 +59,26 @@ body {
 .todo-list-item label{
 	position: relative;
 	padding-left: 54px;
+	padding-right: 40px;
 }
 
 .todo-list-item.done .item-content{
     text-decoration: line-through;
+}
+
+.item-delete{
+	position: absolute;
+	display: none;
+	right: 15px;
+	text-decoration: none;
+	color: #000;
+	font-size: 22px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.todo-list-item.done .item-delete{
+	display: block;
 }
 
 .todo-list-item:not(.done) .item-decor {
@@ -158,7 +174,7 @@ body {
     background-color: #DC143C;
 }
 
-@media screen and (max-width: 447px){
+@media screen and (max-width: 470px){
 	.add-form {
 		flex-wrap: wrap;
 	}
