@@ -174,7 +174,7 @@ body {
     background-color: #DC143C;
 }
 @media (max-width: 768px) {
-	.item-delete{
+	.todo-list-item.done .item-delete{
 	    display: block
 	}
 }
