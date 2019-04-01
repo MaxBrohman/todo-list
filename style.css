@@ -173,13 +173,18 @@ body {
 .add-form-button:active {
     background-color: #DC143C;
 }
-
-@media screen and (max-width: 470px){
+@media (max-width: 768px) {
+	.item-delete{
+	    display: block
+	}
+}
+@media (max-width: 470px){
 	.add-form {
-		flex-wrap: wrap;
+	    flex-wrap: wrap;
 	}
 	.add-form-input{
-		margin-right: 0;
-		margin-bottom: 10px;
+	    margin-right: 0;
+	    margin-bottom: 10px;
 	}
 } 
+
