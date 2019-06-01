@@ -38,7 +38,7 @@ class List{
 		newItem.querySelector('.item-content').textContent = value;
 		this.addCheckHandler(newItem);
 		if(!id) {
-			newItem.dataset.id = new Date().getMilliseconds();
+			newItem.dataset.id = new Date().getTime();
 			this.setTask(tasks, newItem);
 		} else{
 			newItem.dataset.id = id;
